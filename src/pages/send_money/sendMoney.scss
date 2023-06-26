@@ -1,0 +1,199 @@
+@import "../../global.scss";
+
+.sendMoneyPage {
+  display: flex;
+  flex-direction: column;
+  .pageLayout {
+    display: flex;
+    height: calc(100vh - 70px);
+    .pageContainer {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+      .sendMoneyBox {
+        width: 60%;
+        height: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+        .sendTop {
+          width: 80%;
+          height: 160px;
+          background-color: white;
+          border-radius: 10px;
+          box-shadow: 2px 7px 17px 0px rgba(0, 0, 0, 0.247);
+          -webkit-box-shadow: 2px 7px 17px 0px rgba(0, 0, 0, 0.253);
+          -moz-box-shadow: 2px 7px 17px 0px rgba(0, 0, 0, 0.205);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          overflow: hidden;
+          margin-bottom: 20px;
+          .fromGrayox {
+            flex: 1;
+            background-color: rgb(231, 231, 231);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            p {
+              margin-left: 30px;
+            }
+          }
+          .userInfo {
+            flex: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+            .detailName {
+              font-size: 20px;
+              font-weight: 200;
+              color: rgb(70, 70, 70);
+            }
+            .detailAcc {
+              color: rgb(129, 129, 129);
+            }
+          }
+        }
+        .sendButtom {
+          width: 80%;
+          height: 200px;
+          border-radius: 20px;
+          box-shadow: 2px 7px 17px 0px rgba(0, 0, 0, 0.247);
+          -webkit-box-shadow: 2px 7px 17px 0px rgba(0, 0, 0, 0.253);
+          -moz-box-shadow: 2px 7px 17px 0px rgba(0, 0, 0, 0.205);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          .transferTo {
+            flex: 1;
+            background-color: rgb(231, 231, 231);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            p {
+              display: flex;
+              align-items: center;
+              margin-left: 30px;
+            }
+          }
+          .beneficiaryDetailsBox {
+            flex: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            .inputSide {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-direction: column;
+              width: 100%;
+              gap: 9px;
+              .inputLabel {
+                display: flex;
+                width: 100%;
+                justify-content: flex-start;
+                margin-left: 220px;
+                font-weight: 100;
+              }
+              .accNumber {
+                width: 60%;
+                height: 30px;
+                border: 1px solid gray;
+                border-radius: 30px;
+                box-shadow: 2px 4px 6px 0px rgba(179, 179, 179, 0.247);
+                -webkit-box-shadow: 2px 4px 6px 0px rgba(138, 138, 138, 0.253);
+                -moz-box-shadow: 2px 4px 6px 0px rgba(182, 182, 182, 0.205);
+                outline: none;
+              }
+            }
+            .beneficiaryName{
+                background-color: rgba(0, 128, 0, 0.26);
+                padding-left: 60px;
+                padding-right: 60px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                border-radius: 30px;
+            }
+          }
+        }
+
+        .under{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            .amountInput{
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 20px;
+                .naira{
+                    color: rgb(0, 92, 0);
+                }
+                .amount{
+                    width: 40%;
+                    height: 30px;
+                    border: 1px solid gray;
+                    border-radius: 30px;
+                    box-shadow: 2px 4px 6px 0px rgba(179, 179, 179, 0.247);
+                    -webkit-box-shadow: 2px 4px 6px 0px rgba(138, 138, 138, 0.253);
+                    -moz-box-shadow: 2px 4px 6px 0px rgba(182, 182, 182, 0.205);
+                    outline: none;
+                    
+                }
+            }
+            .narrationSide{
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                .narration{
+                    color: rgb(0, 92, 0);
+                }
+                .narrationInput{
+                    width: 60%;
+                    height: 30px;
+                    border: 1px solid gray;
+                    border-radius: 30px;
+                    box-shadow: 2px 4px 6px 0px rgba(179, 179, 179, 0.247);
+                    -webkit-box-shadow: 2px 4px 6px 0px rgba(138, 138, 138, 0.253);
+                    -moz-box-shadow: 2px 4px 6px 0px rgba(182, 182, 182, 0.205);
+                    outline: none;
+                    font-size: 20px;
+
+                }
+
+            }
+            .sendButton {
+                width: 300px;
+                height: 40px;
+                border: none;
+                border-radius: 20px;
+                background-color: $mainColorDark;
+                color: white;
+                cursor: pointer;
+                font-size: 20px;
+              }
+        }
+        
+      }
+    }
+  }
+}

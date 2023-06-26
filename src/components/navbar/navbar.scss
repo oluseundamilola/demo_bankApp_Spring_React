@@ -1,0 +1,48 @@
+@import "../../global.scss";
+
+.navbar{
+    width: 100%;
+    height: 70px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .logoContainer{
+        margin-left: 60px;
+        .logo{
+            color: $mainColor;
+            cursor: pointer;
+        }
+    }
+    .wordsContainer{
+        margin-right: 60px;
+        align-items: flex-start;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        .login{
+            color: rgb(255, 78, 113);
+            font-size: 12px;
+            font-weight: 200;
+            cursor: pointer;
+        }
+        .account{
+            background-color: crimson;
+            padding: 10px;
+            border-radius: 12px;
+            color: white;
+            font-size: 12px;
+            font-weight: 200;
+            cursor: pointer;
+        }
+        .user{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            .icon{
+                color: rgb(255, 78, 113);
+            }
+        }
+    }
+}
