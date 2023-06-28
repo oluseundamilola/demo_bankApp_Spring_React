@@ -1,8 +1,10 @@
 package com.demo_bank.demoBank.controller;
 
 import com.demo_bank.demoBank.DAOmodel.Account;
+import com.demo_bank.demoBank.DTO.BeneficiaryResponseDTO;
 import com.demo_bank.demoBank.DTO.SendMoneyRequest;
 import com.demo_bank.demoBank.config.Session;
+import com.demo_bank.demoBank.service.AccountService;
 import com.demo_bank.demoBank.service.TransactionService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +22,28 @@ public class TransactionController {
     private Session session;
     @Autowired
     private HttpServletRequest request;
+    @Autowired
+    private AccountService accountService;
 
     @PostMapping(path = "/send_money")
-    public String sendMoney(@RequestBody SendMoneyRequest sendMoneyRequest){
-        Account beneficiary = session.getBeneficiary();
+    public String sendMoney(@RequestBody SendMoneyRequest sendMoneyRequest) {
         String sender = request.getUserPrincipal().getName();
-        transactionService.sendMoney(sendMoneyRequest.getAmount(), beneficiary, sender, sendMoneyRequest.getNarration());
-        return sendMoneyRequest.getAmount() + "was successfully sent to " + beneficiary.getFirstName() + beneficiary.getLastName();
+        Account beneficiary = accountService.getBeneficiaryByAccountNumber(sendMoneyRequest.getBeneficiaryAccountNumber());
+        return (transactionService.sendMoney(sendMoneyRequest.getAmount(), beneficiary, sender, sendMoneyRequest.getNarration()));
     }
 
     @PostMapping(path = "/check_session")
-    public Account checkSession(){
-        return session.getBeneficiary();
+    public ResponseEntity<Object> checkSession() {
+        Account beneficiary = session.getBeneficiary();
+        if(beneficiary == null){
+            String errorMessage = "No Beneficiary selected";
+            return ResponseEntity.badRequest().body(errorMessage);
+        }
+        else{
+            BeneficiaryResponseDTO response = new BeneficiaryResponseDTO();
+            response.setBeneficiary(beneficiary.getFirstName() + " " + beneficiary.getLastName());
+            return ResponseEntity.ok(response);
+        }
     }
 
 }

@@ -10,7 +10,6 @@ const Navbar = ({ type }) => {
     const loadUserData = () => {
       AccountService.getAccountInfo()
       .then((response) => {
-        console.log(response.data)
         setUserData(response.data)
       })
       .catch((error) => {

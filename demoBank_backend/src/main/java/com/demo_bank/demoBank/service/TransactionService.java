@@ -19,13 +19,7 @@ public class TransactionService {
     private TransactionRepo transactionRepo;
 
 
-    public Object sendMoney(int amount, Account beneficiary, String sender, String narration) {
-        //update sender balance (balance - amount = new balance)
-        //update beneficiary balance (balance + amount = new balance)
-        //create  two new transaction object (one for user one for beneficiary
-        //narration, type?? hummm
-
-
+    public String sendMoney(int amount, Account beneficiary, String sender, String narration) {
         Account senderAccount = getSenderAccount(sender);
         int senderCurrentBalance = senderAccount.getBalance();
 
@@ -57,12 +51,12 @@ public class TransactionService {
             transactionRepo.save(beneficiaryTransaction);
 
         } else if (senderCurrentBalance < amount) {
-            return "Insuffeient funds";
+            return "funds";
         } else if (senderCurrentBalance < 150) {
-            return "Must have more than 150 to make tranfers";
+            return "block";
         }
 
-        return senderTransaction;
+        return "success";
 
 
     }

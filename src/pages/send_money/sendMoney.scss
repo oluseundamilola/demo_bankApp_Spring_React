@@ -13,6 +13,73 @@
       justify-content: center;
       flex-direction: column;
       gap: 20px;
+      position: relative;
+      .messageBox {
+        box-shadow: 10px 10px 400px 0px rgba(0, 0, 0, 0.75);
+        -webkit-box-shadow: 10px 10px 400px 1000px rgba(0, 0, 0, 0.445);
+        -moz-box-shadow: 10px 10px 400px 0px rgba(0, 0, 0, 0.75);
+        width: 400px;
+        height: 600px;
+        position: absolute;
+        top: 0;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        .statusPostion{
+          flex: 2;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          width: 100%;
+          .status{
+            font-size: 30px;
+            color: gray;
+          }
+          .iconContainer{
+            .icon{
+              font-size: 100px;
+              color: green;
+            }
+            .icon-error{
+              font-size: 100px;
+              color: red;
+            }
+            .icon-warning{
+              font-size: 100px;
+              color: yellow;
+            }
+          }
+        }
+        .messageSide{
+          width: 80%;
+          flex: 3;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          gap: 30px;
+          .message{
+            font-size: 20px;
+            text-align: center;
+            line-height: 36px;
+            margin-bottom: 40px;
+          }
+          .ok{
+            width: 300px;
+            height: 40px;
+            border: none;
+            border-radius: 20px;
+            background-color: $mainColorDark;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+            margin-top: 70px;
+
+          }
+        }
+      }
       .sendMoneyBox {
         width: 60%;
         height: 90%;
@@ -118,81 +185,77 @@
                 outline: none;
               }
             }
-            .beneficiaryName{
-                background-color: rgba(0, 128, 0, 0.26);
-                padding-left: 60px;
-                padding-right: 60px;
-                padding-top: 10px;
-                padding-bottom: 10px;
-                border-radius: 30px;
+            .beneficiaryName {
+              background-color: rgba(0, 128, 0, 0.26);
+              padding-left: 60px;
+              padding-right: 60px;
+              padding-top: 10px;
+              padding-bottom: 10px;
+              border-radius: 30px;
             }
           }
         }
 
-        .under{
+        .under {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          gap: 10px;
+          width: 100%;
+          .amountInput {
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
             gap: 10px;
+            margin-top: 20px;
+            .naira {
+              color: rgb(0, 92, 0);
+            }
+            .amount {
+              width: 40%;
+              height: 30px;
+              border: 1px solid gray;
+              border-radius: 30px;
+              box-shadow: 2px 4px 6px 0px rgba(179, 179, 179, 0.247);
+              -webkit-box-shadow: 2px 4px 6px 0px rgba(138, 138, 138, 0.253);
+              -moz-box-shadow: 2px 4px 6px 0px rgba(182, 182, 182, 0.205);
+              outline: none;
+            }
+          }
+          .narrationSide {
             width: 100%;
-            .amountInput{
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
-                margin-top: 20px;
-                .naira{
-                    color: rgb(0, 92, 0);
-                }
-                .amount{
-                    width: 40%;
-                    height: 30px;
-                    border: 1px solid gray;
-                    border-radius: 30px;
-                    box-shadow: 2px 4px 6px 0px rgba(179, 179, 179, 0.247);
-                    -webkit-box-shadow: 2px 4px 6px 0px rgba(138, 138, 138, 0.253);
-                    -moz-box-shadow: 2px 4px 6px 0px rgba(182, 182, 182, 0.205);
-                    outline: none;
-                    
-                }
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            .narration {
+              color: rgb(0, 92, 0);
             }
-            .narrationSide{
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
-                .narration{
-                    color: rgb(0, 92, 0);
-                }
-                .narrationInput{
-                    width: 60%;
-                    height: 30px;
-                    border: 1px solid gray;
-                    border-radius: 30px;
-                    box-shadow: 2px 4px 6px 0px rgba(179, 179, 179, 0.247);
-                    -webkit-box-shadow: 2px 4px 6px 0px rgba(138, 138, 138, 0.253);
-                    -moz-box-shadow: 2px 4px 6px 0px rgba(182, 182, 182, 0.205);
-                    outline: none;
-                    font-size: 20px;
-
-                }
-
+            .narrationInput {
+              width: 60%;
+              height: 30px;
+              border: 1px solid gray;
+              border-radius: 30px;
+              box-shadow: 2px 4px 6px 0px rgba(179, 179, 179, 0.247);
+              -webkit-box-shadow: 2px 4px 6px 0px rgba(138, 138, 138, 0.253);
+              -moz-box-shadow: 2px 4px 6px 0px rgba(182, 182, 182, 0.205);
+              outline: none;
+              font-size: 20px;
             }
-            .sendButton {
-                width: 300px;
-                height: 40px;
-                border: none;
-                border-radius: 20px;
-                background-color: $mainColorDark;
-                color: white;
-                cursor: pointer;
-                font-size: 20px;
-              }
+          }
+          .sendButton {
+            width: 300px;
+            height: 40px;
+            border: none;
+            border-radius: 20px;
+            background-color: $mainColorDark;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+          }
         }
-        
       }
     }
   }

@@ -10,8 +10,6 @@ import lombok.*;
 @Setter
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SendMoneyRequest {
-    private String beneficiaryAccountNumber;
-    private int amount;
-    private String narration;
+public class BeneficiaryResponseDTO {
+    private String beneficiary;
 }

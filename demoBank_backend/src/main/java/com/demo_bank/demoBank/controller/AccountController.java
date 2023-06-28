@@ -2,6 +2,8 @@ package com.demo_bank.demoBank.controller;
 
 import com.demo_bank.demoBank.DAOmodel.Account;
 import com.demo_bank.demoBank.DTO.AccountDTO;
+import com.demo_bank.demoBank.DTO.BeneficiaryResponseDTO;
+import com.demo_bank.demoBank.config.Session;
 import com.demo_bank.demoBank.service.AccountService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +32,14 @@ public class AccountController {
         return ResponseEntity.ok(accountService.getAccountInfo(accountNumber));
     }
 
-    @GetMapping(path = "/getBeneficiary")
-    public String getBeneficiaryByAccountNumber(@RequestBody AccountDTO accountDTO){
+    @PostMapping(path = "/getBeneficiary")
+    public Object getBeneficiaryByAccountNumber(@RequestBody AccountDTO accountDTO){
         Account selectedBeneficiary = accountService.getBeneficiaryByAccountNumber(accountDTO.getAccountNumber());
-        return "You have selected " + selectedBeneficiary.getFirstName() + " as Beneficiary";
+        BeneficiaryResponseDTO response = new BeneficiaryResponseDTO();
+        response.setBeneficiary(selectedBeneficiary.getFirstName() + " " + selectedBeneficiary.getLastName());
+        return response;
     }
+
+
 
 }

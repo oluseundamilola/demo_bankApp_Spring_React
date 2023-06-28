@@ -17,8 +17,6 @@ public class AccountService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private AccountRepo accountRepo;
-    @Autowired
-    private Session session;
 
 
     public Account addAccount(Account account) {
@@ -35,7 +33,6 @@ public class AccountService {
     }
     public Account getBeneficiaryByAccountNumber(String accountNumber){
         Account beneficiaryAccount = accountRepo.findOneByAccountNumber(accountNumber).get();
-        session.setBeneficiary(beneficiaryAccount);
         return beneficiaryAccount;
     }
 
