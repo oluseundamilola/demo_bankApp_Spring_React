@@ -20,11 +20,14 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long transaction_id;
     private String narration;
+    private String details;
     private String beneficiary;
     private String type;
     private String status;
     private int amount;
     private String sender;
+    private String date;
+    private String time;
 
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "account_id", nullable = false)

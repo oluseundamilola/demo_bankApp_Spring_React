@@ -36,13 +36,44 @@
             font-weight: 200;
             cursor: pointer;
         }
-        .user{
+        .userSide{
             display: flex;
             align-items: center;
-            gap: 10px;
-            .icon{
-                color: rgb(255, 78, 113);
+            justify-content: center;
+            gap: 40px;
+            .user{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                .icon{
+                    color: $mainColorDark;
+                }
             }
+            .bell{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                cursor: pointer;
+                .bellIcon{
+                    color: $mainColorDark;
+                }
+                .circle{
+                    width: 20px;
+                    height: 20px;
+                    background-color: white;
+                    border: 1px solid red;
+                    border-radius: 50%;
+                    position: absolute;
+                    left: 10px;
+                    bottom: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: red;
+                }
+            }
+
         }
     }
 }

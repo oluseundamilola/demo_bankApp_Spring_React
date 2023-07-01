@@ -32,6 +32,18 @@ public class TransactionController {
         return (transactionService.sendMoney(sendMoneyRequest.getAmount(), beneficiary, sender, sendMoneyRequest.getNarration()));
     }
 
+    @GetMapping(path = "/transactions/{type}")
+    public ResponseEntity<?> getAccountTransactionsByType(String accountNumber, @PathVariable String type){
+        accountNumber = request.getUserPrincipal().getName();
+        return ResponseEntity.ok(transactionService.getAccountTransactionsByType(accountNumber, type));
+    }
+
+    @GetMapping(path = "/transactions")
+    public ResponseEntity<?> getAllAccountTransaction(String accountNumber){
+        accountNumber = request.getUserPrincipal().getName();
+        return ResponseEntity.ok(transactionService.getAllAccountTransactions(accountNumber));
+    }
+
     @PostMapping(path = "/check_session")
     public ResponseEntity<Object> checkSession() {
         Account beneficiary = session.getBeneficiary();

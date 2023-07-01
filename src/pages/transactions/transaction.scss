@@ -1,0 +1,116 @@
+@import "../../global.scss";
+
+.transactionPage {
+  display: flex;
+  flex-direction: column;
+  .tPagelayout {
+    display: flex;
+    .tPageContainer{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        .topic{
+            color: gray;
+            width: 60%;
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 20px;
+        }
+
+        .transactions{
+            margin-top: 40px;
+            width: 800px;
+            height: 180px;
+            border-bottom: 1px solid $mainColorDark;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            .boxTop{
+                flex: 1;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .dateSide{
+                    color: gray;
+                    font-size: 12px;
+                }
+                .Credit{
+                    font-weight: 600;
+                    color: green;
+                }
+                .Declined{
+                    font-weight: 600;
+                    color:rgb(173, 173, 0);
+                }
+                .Debit{
+                    font-weight: 600;
+                    color: red;
+                }
+            }
+            .boxMiddle{
+                flex: 1;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .leftSide{
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+                    gap: 10px;
+                    .detail{
+                        font-size: 20px;
+                    }
+                }
+                .rightSide{
+                    width: 60%;
+                    display: flex;
+                    justify-content: flex-end;
+                    .Debit{
+                        color: rgba(255, 0, 0, 0.664);
+                        background-color: rgba(255, 0, 0, 0.185);
+                        width: 70px;
+                        height: 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 30px;
+                    }
+                    .Credit{
+                        color: rgba(14, 173, 0, 0.664);
+                        background-color: rgba(14, 173, 0, 0.247);
+                        width: 70px;
+                        height: 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 30px;
+                    }
+                    .Declined{
+                        color: rgba(173, 161, 0, 0.664);
+                        background-color: rgba(173, 161, 0, 0.226);
+                        width: 70px;
+                        height: 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 30px;
+                    }
+                }
+
+            }
+            .boxDown{
+                flex: 1;
+                width: 100%;
+                display: flex;
+                align-items: center;
+            }
+            
+        }     
+    }
+  }
+}

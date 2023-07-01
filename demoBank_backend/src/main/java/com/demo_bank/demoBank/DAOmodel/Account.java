@@ -27,6 +27,7 @@ public class Account {
 
     private String accountNumber;
     private int balance;
+    private int notification;
 
     private String password;
 }

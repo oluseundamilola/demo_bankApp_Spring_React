@@ -40,6 +40,13 @@ public class AccountController {
         return response;
     }
 
+    @PostMapping(path = "/notification_clear")
+    public Object clearNotification(){
+        String accountNumber = request.getUserPrincipal().getName();
+        return ResponseEntity.ok(accountService.clearNofitication(accountNumber));
+    }
+
+
 
 
 }

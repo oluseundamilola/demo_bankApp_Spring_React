@@ -47,4 +47,11 @@ public class AccountService {
         //if accountNumberGenerated = any account number
         //generated another
     }
+
+    public Object clearNofitication(String accountNumber) {
+        Account account = accountRepo.findOneByAccountNumber(accountNumber).get();
+        account.setNotification(0);
+        accountRepo.save(account);
+        return "Cleared";
+    }
 }

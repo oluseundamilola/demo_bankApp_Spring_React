@@ -4,6 +4,7 @@ import Login from "./pages/login/Login"
 import Register from "./pages/register/Register"
 import Dashboard from "./pages/dashboard/Dashboard"
 import SendMoney from "./pages/send_money/SendMoney"
+import Transactions from "./pages/transactions/Transactions"
 
 
 
@@ -30,6 +31,10 @@ function App() {
 
         <Route path="/send_money">
           <Route index element ={<SendMoney/>} />
+        </Route>
+
+        <Route path="/transactions">
+          <Route index element={<Transactions />} />
         </Route>
 
       </Routes>

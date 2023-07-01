@@ -17,4 +17,5 @@ public class AccountDTO {
     private Long balance;
     private String password;
     private String accountNumber;
+    private int notification;
 }

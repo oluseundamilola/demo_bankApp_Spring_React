@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./register.scss";
 import { useState } from "react";
 import AccountService from "../../services/AccountService"
 
 const Register = () => {
+  const navigate = useNavigate();
   const [registerDetails, setRegisterDetails] = useState({
     firstName: "",
     lastName: "",
@@ -24,6 +25,7 @@ const Register = () => {
     AccountService.createNewAccount(registerDetails)
     .then((response) => {
       console.log(response.data)
+      navigate("/login")
     })
     .catch((error) => {
       console.log(error)

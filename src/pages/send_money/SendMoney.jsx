@@ -11,6 +11,7 @@ import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
 const SendMoney = () => {
   const navigate = useNavigate();
+  const [userData, setUserData] = useState({});
   const [transferStatus, setTransferStatus] = useState("");
   const [boxDisplay, setBoxDisplay] = useState("none");
   const [beneficiaryAccountNumber, setBeneficiaryAccountNumber] = useState({
@@ -44,6 +45,17 @@ const SendMoney = () => {
       previousAccountNumber.current = beneficiaryAccountNumber.accountNumber;
       setBeneficiaryStyle("");
     }
+
+    const loadUserData = () => {
+      AccountService.getAccountInfo()
+        .then((response) => {
+          setUserData(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    loadUserData()
   }, [beneficiaryAccountNumber, beneficiary]);
 
   const findBeneficiaryFunction = async () => {
@@ -105,8 +117,7 @@ const SendMoney = () => {
               </div>
               <div className="messageSide">
                 <p className="message">
-                You have successfully transferred NGN { sendMoneyRequest.amount } to
-                  { beneficiary.beneficiary }
+                You have successfully transferred NGN { sendMoneyRequest.amount } to { beneficiary.beneficiary }
                 </p>
                 <button onClick={okay} className="ok">
                   OK
@@ -125,8 +136,7 @@ const SendMoney = () => {
               </div>
               <div className="messageSide">
                 <p className="message">
-                  You have successfully transferred NGN 180,000 to Olanike
-                  Oluseun
+                  You don't have enough funds to make this transaction
                 </p>
                 <button onClick={okay} className="ok">
                   OK
@@ -145,8 +155,7 @@ const SendMoney = () => {
               </div>
               <div className="messageSide">
                 <p className="message">
-                  You have successfully transferred NGN {sendMoneyRequest.amount} to 
-                  { beneficiary.beneficiary }
+                  You cannot tranfer less than NGN 100
                 </p>
                 <button onClick={okay} className="ok">
                   OK
@@ -160,8 +169,8 @@ const SendMoney = () => {
                 <p>Transfer From:</p>
               </div>
               <div className="userInfo">
-                <p className="detailName">OLUWADAMILOLA OLUSEUN</p>
-                <p className="detailAcc">Saving Account: 1222380928</p>
+                <p className="detailName">{userData.firstName} {userData.lastName}</p>
+                <p className="detailAcc">Saving Account: {userData.accountNumber}</p>
               </div>
             </div>
             <div className="sendButtom">

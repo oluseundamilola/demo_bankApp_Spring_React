@@ -23,6 +23,18 @@ class AccountService {
     )
   }
 
+  clearNotification(){
+    const tokenString = Cookies.get("_auth");
+    return axios.post(
+      ACCOUNT_BASE_URL + "notification_clear",
+      {},
+      {
+        headers: { Authorization: `Bearer ${tokenString}` },
+        "Content-Type": "application/json",
+      }
+    )
+  }
+
   
 }
 
