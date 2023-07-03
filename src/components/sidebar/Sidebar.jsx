@@ -11,9 +11,18 @@ import FlightIcon from '@mui/icons-material/Flight';
 import SportsVolleyballIcon from '@mui/icons-material/SportsVolleyball';
 import DiamondIcon from '@mui/icons-material/Diamond';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { useSignOut } from "react-auth-kit";
+import { useNavigate } from "react-router-dom";
 
 
 const Sidebar = () => {
+  const signOut = useSignOut()
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    console.log("logOut")
+    signOut()
+    navigate("/login")
+  }
   return (
     <div className='sideBar'>
       <div className="sideBarContainerTop">
@@ -69,7 +78,7 @@ const Sidebar = () => {
         </div>
       </div>
       <div className="sideBarContainerUnder">
-        <div className="signoutBox">
+        <div className="signoutBox" onClick={handleLogout}>
           <div className="iconCircle">
           <ExitToAppIcon className="icon" />
           </div>

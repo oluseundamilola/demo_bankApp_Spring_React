@@ -255,6 +255,17 @@
             cursor: pointer;
             font-size: 20px;
           }
+          .loading{
+            width: 300px;
+            height: 40px;
+            border: none;
+            border-radius: 20px;
+            background-color: rgb(255, 156, 176);
+            color: white;
+            cursor: not-allowed;
+            font-size: 20px;
+
+          }
         }
       }
     }

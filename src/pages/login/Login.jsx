@@ -5,10 +5,11 @@ import { useSignIn } from "react-auth-kit";
 import LoginService from "../../services/LoginService";
 
 const Login = () => {
-  const signIn = useSignIn()
-  const navigate = useNavigate()
+  const signIn = useSignIn();
+  const navigate = useNavigate();
   const [textStyleForAccount, setTextStyleForAccount] = useState("input");
   const [textStyleForPassword, setTextStyleForPassword] = useState("input");
+  const [isLoading, setIsLoading] = useState("notLoading");
 
   const [loginDetails, setLoginDetails] = useState({
     accountNumber: "",
@@ -26,30 +27,27 @@ const Login = () => {
     console.log(loginDetails);
     if (loginDetails.accountNumber === "") {
       setTextStyleForAccount("error");
-    }
-    else{
-      setTextStyleForAccount("input")
+    } else {
+      setTextStyleForAccount("input");
     }
     if (loginDetails.password === "") {
       setTextStyleForPassword("error");
-    }
-    else{
+    } else {
       setTextStyleForPassword("input");
     }
 
-    if(loginDetails.accountNumber !== "" && loginDetails.password !== ""){
-      await LoginService.loginUser(loginDetails)
-      .then( (response) => {
-        console.log(response.data)
+    if (loginDetails.accountNumber !== "" && loginDetails.password !== "") {
+      setIsLoading("Loading")
+      await LoginService.loginUser(loginDetails).then((response) => {
+        console.log(response.data);
         signIn({
           token: response.data,
           expiresIn: 3600,
           tokenType: "Bearer",
-          authState: {email: loginDetails.accountNumber}
-        })
-        navigate("/dashboard")
-      } )
-      
+          authState: { email: loginDetails.accountNumber },
+        });
+        navigate("/dashboard");
+      });
     }
   };
 
@@ -65,19 +63,26 @@ const Login = () => {
               className={textStyleForAccount}
               onChange={(e) => handleChange(e)}
               name="accountNumber"
-            /> 
+            />
             <span className="label">Password: </span>
             <input
-              type="text"
+              type="password"
               className={textStyleForPassword}
               onChange={(e) => handleChange(e)}
               name="password"
             />
           </div>
           <div className="buttonSide">
-            <button className="signIn" onClick={handleSubmit}>
-              Login
-            </button>
+            {isLoading === "notLoading" && (
+              <button className={isLoading} onClick={handleSubmit}>
+                Login
+              </button>
+            )}
+             {isLoading === "Loading" && (
+              <button className={isLoading} onClick={handleSubmit}>
+                loading...
+              </button>
+            )}
             <Link to="/register">
               <div className="create">Open Account</div>
             </Link>

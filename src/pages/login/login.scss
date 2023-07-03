@@ -68,7 +68,7 @@
         justify-content: center;
         flex-direction: column;
         gap: 20px;
-        .signIn {
+        .notLoading {
           width: 80%;
           padding: 12px;
           background-color: $mainColorDark;
@@ -77,6 +77,17 @@
           outline: none;
           border-radius: 30px;
           cursor: pointer;
+        }
+        .Loading{
+          width: 80%;
+          padding: 12px;
+          background-color: rgb(255, 180, 195);
+          color: white;
+          border: none;
+          outline: none;
+          border-radius: 30px;
+          cursor: not-allowed;
+
         }
         .create {
           font-size: 13px;

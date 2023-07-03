@@ -6,14 +6,15 @@ import "./sendMoney.scss";
 import AccountService from "../../services/AccountService";
 import TransactionService from "../../services/TransactionService";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import ErrorIcon from '@mui/icons-material/Error';
-import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import ErrorIcon from "@mui/icons-material/Error";
+import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 
 const SendMoney = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
   const [transferStatus, setTransferStatus] = useState("");
   const [boxDisplay, setBoxDisplay] = useState("none");
+  const [isLoading, setIsLoading] = useState("notLoading");
   const [beneficiaryAccountNumber, setBeneficiaryAccountNumber] = useState({
     accountNumber: "",
   });
@@ -54,8 +55,8 @@ const SendMoney = () => {
         .catch((error) => {
           console.log(error);
         });
-    }
-    loadUserData()
+    };
+    loadUserData();
   }, [beneficiaryAccountNumber, beneficiary]);
 
   const findBeneficiaryFunction = async () => {
@@ -83,6 +84,7 @@ const SendMoney = () => {
 
   const tranferButton = (e) => {
     e.preventDefault();
+    setIsLoading("Loading");
     console.log(sendMoneyRequest);
     TransactionService.sendMoney(sendMoneyRequest)
       .then((response) => {
@@ -117,7 +119,8 @@ const SendMoney = () => {
               </div>
               <div className="messageSide">
                 <p className="message">
-                You have successfully transferred NGN { sendMoneyRequest.amount } to { beneficiary.beneficiary }
+                  You have successfully transferred NGN{" "}
+                  {sendMoneyRequest.amount} to {beneficiary.beneficiary}
                 </p>
                 <button onClick={okay} className="ok">
                   OK
@@ -154,9 +157,7 @@ const SendMoney = () => {
                 </div>
               </div>
               <div className="messageSide">
-                <p className="message">
-                  You cannot tranfer less than NGN 100
-                </p>
+                <p className="message">You cannot tranfer less than NGN 100</p>
                 <button onClick={okay} className="ok">
                   OK
                 </button>
@@ -169,8 +170,12 @@ const SendMoney = () => {
                 <p>Transfer From:</p>
               </div>
               <div className="userInfo">
-                <p className="detailName">{userData.firstName} {userData.lastName}</p>
-                <p className="detailAcc">Saving Account: {userData.accountNumber}</p>
+                <p className="detailName">
+                  {userData.firstName} {userData.lastName}
+                </p>
+                <p className="detailAcc">
+                  Savings Account: {userData.accountNumber}
+                </p>
               </div>
             </div>
             <div className="sendButtom">
@@ -216,9 +221,16 @@ const SendMoney = () => {
                   onChange={handleChangeOfAmountandNarrationInput}
                 />
               </div>
-              <button className="sendButton" onClick={tranferButton}>
-                Transfer
-              </button>
+              {isLoading === "notLoading" && (
+                <button className="sendButton" onClick={tranferButton}>
+                  Transfer
+                </button>
+              )}
+              {isLoading === "Loading" && (
+                <button className="loading" onClick={tranferButton}>
+                  Please Wait...
+                </button>
+              )}
             </div>
           </div>
         </div>

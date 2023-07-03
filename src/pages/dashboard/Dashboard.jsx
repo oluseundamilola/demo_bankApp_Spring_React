@@ -14,6 +14,26 @@ import { Link } from "react-router-dom";
 const Dashboard = () => {
   const [userData, setUserData] = useState({});
 
+
+  function addCommas(number) {
+    // Convert the number to a string
+    var numberString = String(number);
+    
+    // Split the number into integer and decimal parts (if any)
+    var parts = numberString.split(".");
+    
+    // Get the integer part
+    var integerPart = parts[0];
+    
+    // Add commas every three digits in the integer part
+    var formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    
+    // Combine the formatted integer part with the decimal part (if any)
+    var formattedNumber = parts.length > 1 ? formattedInteger + "." + parts[1] : formattedInteger;
+    
+    return formattedNumber;
+  }
+
   useEffect(() => {
     const loadUserData = () => {
       AccountService.getAccountInfo()
@@ -41,7 +61,7 @@ const Dashboard = () => {
                 </span>
                 <div className="amount">
                   <h2>NGN</h2>
-                  <p>{userData.balance}</p>
+                  <p>{addCommas(userData.balance)}</p>
                 </div>
               </div>
             </div>
