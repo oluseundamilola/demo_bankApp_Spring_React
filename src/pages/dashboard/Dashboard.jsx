@@ -18,19 +18,19 @@ const Dashboard = () => {
   function addCommas(number) {
     // Convert the number to a string
     var numberString = String(number);
-    
+
     // Split the number into integer and decimal parts (if any)
     var parts = numberString.split(".");
-    
+
     // Get the integer part
     var integerPart = parts[0];
-    
+
     // Add commas every three digits in the integer part
     var formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    
+
     // Combine the formatted integer part with the decimal part (if any)
     var formattedNumber = parts.length > 1 ? formattedInteger + "." + parts[1] : formattedInteger;
-    
+
     return formattedNumber;
   }
 
@@ -49,6 +49,13 @@ const Dashboard = () => {
 
   return (
     <div className="dashboardPage">
+      <Link to="/chat">
+        <div className="botBody">
+          <div className="botContainer">
+          </div>
+          <span className="botMessage">chat with me</span>
+        </div>
+      </Link>
       <Navbar type="afterLogin" />
       <div className="pageLayout">
         <Sidebar />
@@ -76,7 +83,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="dashboardButtom">
-            <Link to = "/send_money">
+            <Link to="/send_money">
               <div className="box" style={{ backgroundColor: "#4ac95f" }}>
                 <CreditCardIcon className="icon" style={{ color: "#266831" }} />
                 <div className="text" style={{ color: "#225c2c" }}>

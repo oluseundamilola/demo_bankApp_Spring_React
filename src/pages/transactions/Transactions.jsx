@@ -44,7 +44,8 @@ const Transactions = () => {
               </div>
               <div className="boxDown">
                   <div className="narration">
-                  {transactions.narration}
+                  Reference:
+                  {transactions.transactionRef}
                   </div>
               </div>
             </div>

@@ -50,6 +50,10 @@
                     font-weight: 600;
                     color: red;
                 }
+                .Reversed{
+                    font-weight: 600;
+                     color: green;
+                }
             }
             .boxMiddle{
                 flex: 1;
@@ -81,6 +85,16 @@
                         border-radius: 30px;
                     }
                     .Credit{
+                        color: rgba(14, 173, 0, 0.664);
+                        background-color: rgba(14, 173, 0, 0.247);
+                        width: 70px;
+                        height: 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 30px;
+                    }
+                    .Reversed{
                         color: rgba(14, 173, 0, 0.664);
                         background-color: rgba(14, 173, 0, 0.247);
                         width: 70px;

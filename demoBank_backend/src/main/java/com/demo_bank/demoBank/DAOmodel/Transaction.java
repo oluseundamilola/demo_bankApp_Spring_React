@@ -32,5 +32,11 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "account_id", referencedColumnName = "account_id", nullable = false)
     private Account account;
+    private String transactionRef;
+    private boolean dispute;
+    private String disputeStatus;
+    private boolean reversed;
+    private boolean submittedForReversal;
 
 }
+

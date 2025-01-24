@@ -5,6 +5,7 @@ import Register from "./pages/register/Register"
 import Dashboard from "./pages/dashboard/Dashboard"
 import SendMoney from "./pages/send_money/SendMoney"
 import Transactions from "./pages/transactions/Transactions"
+import Chat from "./pages/chat/Chat"
 
 
 
@@ -35,6 +36,10 @@ function App() {
 
         <Route path="/transactions">
           <Route index element={<Transactions />} />
+        </Route>
+
+        <Route path="/chat">
+          <Route index element={<Chat />} />
         </Route>
 
       </Routes>

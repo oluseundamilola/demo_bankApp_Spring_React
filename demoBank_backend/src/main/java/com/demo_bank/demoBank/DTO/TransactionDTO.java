@@ -21,4 +21,5 @@ public class TransactionDTO {
     private String sender;
     private String date;
     private String time;
+    private String transactionRef;
 }

@@ -8,6 +8,7 @@ import TransactionService from "../../services/TransactionService";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorIcon from "@mui/icons-material/Error";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+import WarningIcon from '@mui/icons-material/Warning';
 
 const SendMoney = () => {
   const navigate = useNavigate();
@@ -140,6 +141,25 @@ const SendMoney = () => {
               <div className="messageSide">
                 <p className="message">
                   You don't have enough funds to make this transaction
+                </p>
+                <button onClick={okay} className="ok">
+                  OK
+                </button>
+              </div>
+            </div>
+          )}
+
+          {transferStatus === "failed" && (
+            <div style={{ display: `${boxDisplay}` }} className="messageBox">
+              <div className="statusPostion">
+                <h2 className="status">An Error Occured</h2>
+                <div className="iconContainer">
+                  <WarningIcon className="icon-error-failed" />
+                </div>
+              </div>
+              <div className="messageSide">
+                <p className="message">
+                  An error occured while trying to send funds, check your connection
                 </p>
                 <button onClick={okay} className="ok">
                   OK

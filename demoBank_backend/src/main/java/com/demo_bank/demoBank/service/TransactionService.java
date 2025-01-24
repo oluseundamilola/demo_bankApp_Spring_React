@@ -9,10 +9,12 @@ import com.demo_bank.demoBank.repository.TransactionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,8 +34,28 @@ public class TransactionService {
 
         Transaction senderTransaction = new Transaction();
         Transaction beneficiaryTransaction = new Transaction();
+        String transactionRef = generateTransactionRef();
 
         if (senderCurrentBalance > amount) {
+            //simulate a failed transaction here
+            if(amount == 5000){
+                int senderNewBalance = senderCurrentBalance - amount;
+                senderAccount.setBalance(senderNewBalance);
+                accountRepo.save(senderAccount);
+
+                senderTransaction.setAccount(senderAccount);
+                senderTransaction.setBeneficiary(beneficiary.getFirstName() + " " + beneficiary.getLastName());
+                senderTransaction.setType("Debit");
+                senderTransaction.setAmount(amount);
+                senderTransaction.setStatus("FAILED");
+                senderTransaction.setNarration(narration);
+                senderTransaction.setDate(DateFormatter());
+                senderTransaction.setTime(TimeFormatter());
+                senderTransaction.setDetails("Transaction failed due to network issues");
+                senderTransaction.setTransactionRef(transactionRef);
+                transactionRepo.save(senderTransaction);
+                return "failed";
+            }
             int senderNewBalance = senderCurrentBalance - amount;
             senderAccount.setBalance(senderNewBalance);
             beneficiary.setBalance(beneficiary.getBalance() + amount);
@@ -51,6 +73,7 @@ public class TransactionService {
             senderTransaction.setDate(DateFormatter());
             senderTransaction.setTime(TimeFormatter());
             senderTransaction.setDetails("Sent to " + beneficiary.getFirstName() + " " + beneficiary.getLastName() );
+            senderTransaction.setTransactionRef(transactionRef);
             transactionRepo.save(senderTransaction);
 
             beneficiaryTransaction.setAccount(beneficiary);
@@ -62,6 +85,7 @@ public class TransactionService {
             beneficiaryTransaction.setDate(DateFormatter());
             beneficiaryTransaction.setTime(TimeFormatter());
             beneficiaryTransaction.setDetails("From " + senderAccount.getFirstName() + " " + senderAccount.getLastName());
+            beneficiaryTransaction.setTransactionRef(generateTransactionRef());
             transactionRepo.save(beneficiaryTransaction);
 
 
@@ -111,6 +135,7 @@ public class TransactionService {
                         .sender(transaction.getSender())
                         .time(transaction.getTime())
                         .type(transaction.getType())
+                        .transactionRef(transaction.getTransactionRef())
                         .build()
                 ).collect(Collectors.toList());
     }
@@ -127,4 +152,75 @@ public class TransactionService {
         String formattedTime = currentTime.format(timeFormatter);
         return formattedTime;
     }
+
+    public Transaction getTransactionByRef( String transactionRef) {
+        Transaction byTransactionRef = transactionRepo.findByTransactionRef(transactionRef);
+        return byTransactionRef;
+    }
+
+    public String preformReversal(String transactionRef){
+        Transaction byTransactionRef = transactionRepo.findByTransactionRef(transactionRef);
+        Account account = byTransactionRef.getAccount();
+        if(byTransactionRef.getAmount() == 5000 && !byTransactionRef.isReversed()){
+            //perform reversal
+            int balance = account.getBalance();
+            int updatedBalance = balance + byTransactionRef.getAmount();
+            account.setBalance(updatedBalance);
+            account.setNotification(account.getNotification() + 1);
+            accountRepo.save(account);
+
+            byTransactionRef.setSubmittedForReversal(true);
+            byTransactionRef.setReversed(true);
+            byTransactionRef.setType("Reversed");
+            transactionRepo.save(byTransactionRef);
+            return "success";
+        }
+        return "failed";
+    }
+
+    public void submitDispute(String transactionId) {
+        Transaction byTransactionRef = transactionRepo.findByTransactionRef(transactionId);
+        byTransactionRef.setDispute(true);
+        byTransactionRef.setDisputeStatus("PENDING");
+        transactionRepo.save(byTransactionRef);
+    }
+
+    public Object reverseFailedTransaction(String transactionRef) {
+        Transaction transactionByRef = getTransactionByRef(transactionRef);
+        if(transactionByRef.getStatus().equalsIgnoreCase("FAILED")){
+            //perform reversal
+            return preformReversal(transactionRef);
+
+        }
+
+        return "This transaction is not suitable for a revesal";
+    }
+
+
+    public static String generateTransactionRef() {
+        // Generate the first part: 3 random digits
+        String prefix = String.format("%03d", new Random().nextInt(1000));
+
+        // Generate a random 4-character alphanumeric string (lowercase letters only)
+        String randomString = generateRandomString(4);
+
+        // Generate the last part: 4 random digits
+        String year = String.format("%04d", new Random().nextInt(10000));
+
+        // Combine all parts to form the transaction reference
+        return String.format("%s-%s-%s", prefix, randomString, year);
+    }
+    private static String generateRandomString(int length) {
+        String characters = "abcdefghijklmnopqrstuvwxyz";
+        Random random = new Random();
+        StringBuilder randomString = new StringBuilder();
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length());
+            randomString.append(characters.charAt(index));
+        }
+
+        return randomString.toString(); // Return the generated string
+    }
+
 }

@@ -58,4 +58,14 @@ public class TransactionController {
         }
     }
 
+    @GetMapping(path = "/transactionRef/{transactionRef}")
+    public ResponseEntity<?> getTransactionByRef(@PathVariable String transactionRef){
+        return ResponseEntity.ok(transactionService.getTransactionByRef(transactionRef));
+    }
+
+    @GetMapping(path = "/reverseFailedTransaction/{transactionRef}")
+    public ResponseEntity<?> reverseFailedTransaction(@PathVariable String transactionRef){
+        return ResponseEntity.ok(transactionService.reverseFailedTransaction(transactionRef));
+    }
+
 }
